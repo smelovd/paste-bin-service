@@ -31,11 +31,18 @@ public class BinController {
         return ResponseEntity.status(HttpStatus.OK).body(binService.findAll());
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     @Operation(summary = "Get bins by user ID")
     public ResponseEntity getAllBinsByUserId(@PathVariable Long id) {
         var user = userService.findUserById(id);
         return ResponseEntity.status(HttpStatus.OK).body(user.getBins());
+    }*/
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get bin by bin ID")
+    public ResponseEntity getBinById(@PathVariable Long id) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(binService.findById(id));
     }
 
     @PostMapping("/create")
@@ -45,11 +52,8 @@ public class BinController {
         bin.setText(binRequest.getText());
 
         User user = userService.findUserById(binRequest.getUserId());
-
-        if (user == null) {
-            System.out.println("null");
-        }
         bin.setUser(user);
+
         Bin savedBin = binService.save(bin);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBin);
     }
