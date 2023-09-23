@@ -9,5 +9,4 @@ class PasteBinApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
