@@ -1,38 +1,42 @@
 package com.shimada.pastebin.services;
 
-import com.shimada.pastebin.Entity.Bin;
+import com.shimada.pastebin.entity.Bin;
 import com.shimada.pastebin.repositories.BinRepository;
+import com.shimada.pastebin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BinService {
 
     private final BinRepository binRepository;
 
-    @Autowired
-    public BinService(BinRepository binRepository) {
-        this.binRepository = binRepository;
-    }
+    private final UserRepository userRepository;
 
-    public ResponseEntity save(Bin bin) {
-        return new ResponseEntity(binRepository.save(bin), HttpStatus.OK);
+    @Autowired
+    public BinService(BinRepository binRepository, UserRepository userRepository) {
+        this.binRepository = binRepository;
+        this.userRepository = userRepository;
     }
 
     public void delete(Bin bin) {
         binRepository.delete(bin);
     }
 
-    public ResponseEntity findAll() {
+    public ResponseEntity findBinsByUserId() {
         return new ResponseEntity(binRepository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity findById(Long id) {
-        return new ResponseEntity(binRepository.findAllByUserId(id), HttpStatus.OK);
+
+    public Bin save(Bin bin) {
+        return binRepository.save(bin);
+    }
+
+    public List<Bin> findAll() {
+        return binRepository.findAll();
     }
 }

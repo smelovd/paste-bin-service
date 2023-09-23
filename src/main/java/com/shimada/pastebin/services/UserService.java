@@ -1,11 +1,11 @@
 package com.shimada.pastebin.services;
 
-import com.shimada.pastebin.Entity.User;
+import com.shimada.pastebin.entity.User;
 import com.shimada.pastebin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,7 +17,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity save(User user) {
-        return new ResponseEntity(userRepository.save(user), HttpStatus.OK);
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User findUserById(Long userId) {
+        var users = userRepository.findById(userId);
+        return users.get();
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }
