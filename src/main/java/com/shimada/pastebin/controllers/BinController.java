@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class BinController {
 
 
-    private BinService binService;
-    private UserService userService;
+    private final BinService binService;
+    private final UserService userService;
 
     @Autowired
     public BinController(BinService binsService, UserService userService) {
