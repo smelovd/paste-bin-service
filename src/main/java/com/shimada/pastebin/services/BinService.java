@@ -39,4 +39,8 @@ public class BinService {
     public List<Bin> findAll() {
         return binRepository.findAll();
     }
+
+    public Object findById(Long id) {
+        return binRepository.findById(id);
+    }
 }
