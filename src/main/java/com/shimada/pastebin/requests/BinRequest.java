@@ -1,6 +1,5 @@
 package com.shimada.pastebin.requests;
 
-import com.shimada.pastebin.entity.Bin;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
